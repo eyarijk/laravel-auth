@@ -62,6 +62,10 @@ class VerificationController extends Controller
             ;
         }
 
+        $user->email_verified_at = new \DateTime();
+
+        $user->save();
+
         return redirect()->route('verification.success');
     }
 
