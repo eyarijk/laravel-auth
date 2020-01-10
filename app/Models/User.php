@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
@@ -15,6 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string password
  * @property string|null created_at
  * @property string|null updated_at
+ * @property UserRegistrationLog registrationLog
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -31,4 +33,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return HasOne
+     */
+    public function registrationLog(): HasOne
+    {
+        return $this->hasOne(UserRegistrationLog::class,'user_id','id');
+    }
 }
