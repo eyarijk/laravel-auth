@@ -17,4 +17,10 @@ interface UserRepositoryInterface
      * @return User
      */
     public function create(array $data): User;
+
+    /**
+     * @param int $id
+     * @return User|null
+     */
+    public function find(int $id): ?User;
 }

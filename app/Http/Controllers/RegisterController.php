@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repository\UserRepositoryInterface;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -11,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RegisterController extends Controller
 {
-
     /**
      * @var UserRepositoryInterface
      */
@@ -67,7 +67,9 @@ class RegisterController extends Controller
             'password' => $this->hasher->make($request->request->get('password')),
         ];
 
-        $this->userRepository->create($data);
+        $user = $this->userRepository->create($data);
+
+        event(new Registered($user));
 
         return redirect()->route('login.form');
     }

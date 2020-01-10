@@ -6,6 +6,10 @@ Route::middleware(['guest'])->group(function () {
 
     Route::get('register','RegisterController@registerForm')->name('register.form');
     Route::post('register','RegisterController@register')->name('register.submit');
+
+    Route::get('verification/success','VerificationController@success')->name('verification.success');
+    Route::get('verification/error','VerificationController@error')->name('verification.error');
+    Route::get('verification/verify/{userID}','VerificationController@verify')->name('verification.verify');
 });
 
 Route::middleware(['auth'])->group(function () {

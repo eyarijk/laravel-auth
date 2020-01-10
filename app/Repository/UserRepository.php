@@ -36,4 +36,15 @@ class UserRepository implements UserRepositoryInterface
 
         return $user;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function find(int $id): ?User
+    {
+        /** @var User $user */
+        $user = User::query()->find($id);
+
+        return $user;
+    }
 }
